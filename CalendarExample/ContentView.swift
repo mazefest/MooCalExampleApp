@@ -16,7 +16,12 @@ struct ContentView: View {
     
     var body: some View {
         ScrollViewReader { proxy in
-            ScrollableCalendarView<EmptyView, EmptyView, EmptyView>(calendarDayView: .classic(eventManager.objects))
+            ScrollableCalendarView<EmptyView, EmptyView, EmptyView>(
+                calendarDayView: .classic(eventManager.objects),
+                onSelection: { calendarDay in
+                    onCalendarDaySelection(calendarDay)
+                }
+            )
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
@@ -45,10 +50,15 @@ struct ContentView: View {
                 case .eventInputSheet, .none:
                     eventInputSheet()
                 case .events(let calendarDay, let events):
+                    let events = eventManager.objects.filter({$0.date.isInDay(calendarDay.date)})
                     calendarDayEventView(calendarDay: calendarDay, events: events)
                 }
             })
         }
+    }
+    
+    private func onCalendarDaySelection(_ calendarDay: CalendarDay) {
+        self.sheetState = .events(calendarDay, eventManager.objects)
     }
     
     // View for inputting event info

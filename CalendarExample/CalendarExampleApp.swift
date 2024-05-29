@@ -14,10 +14,13 @@ struct CalendarExampleApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(
-                eventManager: eventManager,
-                viewModel: .init()
-            )
+            NavigationView {
+                ContentView(
+                    eventManager: eventManager,
+                    viewModel: .init()
+                )
+                .preferredColorScheme(.dark)
+            }
         }
     }
 }
