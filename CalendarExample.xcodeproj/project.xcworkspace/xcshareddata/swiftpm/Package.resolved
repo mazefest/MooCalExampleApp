@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "moocal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mazefest/MooCal",
+      "state" : {
+        "branch" : "master",
+        "revision" : "009496e5c12a4f7d9028b7bdc1546ad61fe0a990"
+      }
+    }
+  ],
+  "version" : 2
+}
